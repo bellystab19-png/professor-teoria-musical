@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professor de Teoria Musical — Curso Completo e Detalhado</title>
+    <!-- Impressão nativa do navegador -->
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2b6cb0;
+            --accent: #ed8936;
+            --bg: #f7fafc;
+            --card: #ffffff;
+            --text: #2d3748;
+            --muted: #718096;
+            --border: #e2e8f0;
+            --success: #38a169;
+            --danger: #c53030;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            display: flex;
+            min-height: 100vh;
+        }
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 4px 0 12px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        .sidebar h1 {
+            font-size: 1.25rem;
+            padding: 0 1.25rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .sidebar h1 span { display: block; font-size: 0.8rem; font-weight: 400; opacity: 0.8; margin-top: 0.25rem; }
+        .nav-item {
+            display: block;
+            padding: 0.7rem 1.25rem;
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .nav-item:hover, .nav-item.active {
+            background: rgba(255,255,255,0.1);
+            border-left-color: var(--accent);
+            color: white;
+        }
+        .nav-section {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 1rem 1.25rem 0.4rem;
+            opacity: 0.6;
+            font-weight: 600;
+        }
+        /* PDF buttons in sidebar */
+        .pdf-section {
+            margin: 1.5rem 1rem 1rem;
+            padding: 1rem;
+            background: rgba(255,255,255,0.08);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .pdf-section h3 {
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+            color: #fbd38d;
+            font-weight: 600;
+        }
+        .btn-pdf {
+            display: block;
+            width: 100%;
+            background: var(--accent);
+            color: #1a202c;
+            border: none;
+            padding: 0.65rem 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .btn-pdf:hover {
+            background: #dd6b20;
+            transform: translateY(-1px);
+        }
+        .btn-pdf.secondary {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        .btn-pdf.secondary:hover {
+            background: rgba(255,255,255,0.25);
+        }
+        .btn-pdf:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
+        /* Main content */
+        .main {
+            margin-left: 300px;
+            flex: 1;
+            padding: 2rem 2.5rem 4rem;
+            max-width: 900px;
+        }
+        .module { display: none; animation: fadeIn 0.3s ease; }
+        .module.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        h2 {
+            color: var(--primary);
+            font-size: 1.9rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .module-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .module-header h2 { margin-bottom: 0; }
+        .btn-module-pdf {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: background 0.2s;
+        }
+        .btn-module-pdf:hover { background: var(--primary); }
+        .btn-module-pdf:disabled { opacity: 0.6; cursor: wait; }
+        .module-subtitle {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        h3 {
+            color: var(--secondary);
+            font-size: 1.35rem;
+            margin: 2rem 0 0.75rem;
+            font-weight: 600;
+        }
+        h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+        p { margin-bottom: 1rem; }
+        ul, ol { margin: 0.75rem 0 1.25rem 1.5rem; }
+        li { margin-bottom: 0.4rem; }
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.25rem 1.5rem;
+            margin: 1.25rem 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .card.highlight {
+            border-left: 4px solid var(--accent);
+            background: #fffaf0;
+        }
+        .card.info {
+            border-left: 4px solid var(--secondary);
+            background: #ebf8ff;
+        }
+        .card.success {
+            border-left: 4px solid var(--success);
+            background: #f0fff4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            font-size: 0.95rem;
+        }
+        th, td {
+            border: 1px solid var(--border);
+            padding: 0.65rem 0.9rem;
+            text-align: left;
+        }
+        th { background: var(--primary); color: white; font-weight: 600; }
+        tr:nth-child(even) { background: #f8fafc; }
+        .note-example {
+            font-family: 'Courier New', monospace;
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            font-size: 1.05rem;
+            letter-spacing: 0.03em;
+        }
+        .quiz-box {
+            background: #edf2f7;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .quiz-box h4 { margin-top: 0; color: var(--primary); }
+        .quiz-option {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.6rem 1rem;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .quiz-option:hover { border-color: var(--secondary); background: #ebf8ff; }
+        .quiz-option.correct { border-color: var(--success); background: #f0fff4; }
+        .quiz-option.wrong { border-color: #e53e3e; background: #fff5f5; }
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            margin-top: 0.75rem;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: var(--primary); }
+        .progress-bar {
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            margin: 1.5rem 0 2rem;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--muted);
+            text-align: center;
+        }
+        .status-msg {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            padding: 0.9rem 1.4rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            font-size: 0.95rem;
+        }
+        .status-msg.show { display: block; animation: fadeIn 0.3s; }
+        .formula {
+            background: #2d3748;
+            color: #f7fafc;
+            padding: 0.75rem 1.25rem;
+            border-radius: 6px;
+            font-family: monospace;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+        /* PDF / Print styles */
+        .pdf-only { display: none; }
+
+        @media print {
+            /* Força cores e contraste altos — evita impressão apagada */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            html, body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                font-size: 11pt !important;
+                line-height: 1.45 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            /* Esconde interface */
+            .sidebar,
+            .btn-module-pdf,
+            .btn-pdf,
+            .pdf-section,
+            .progress-bar,
+            .status-msg,
+            #pdf-overlay,
+            #pdf-capa-temp,
+            .module-header button,
+            footer {
+                display: none !important;
+            }
+
+            /* Layout limpo */
+            .main {
+                margin: 0 !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+                width: 100% !important;
+            }
+
+            /* Módulos: todos visíveis, um por página quando possível */
+            .module {
+                display: block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                position: relative !important;
+                page-break-after: always;
+                page-break-inside: avoid;
+                break-after: page;
+                background: #ffffff !important;
+                color: #000000 !important;
+                padding: 0 8px !important;
+                margin: 0 !important;
+                animation: none !important;
+            }
+            .module:last-of-type {
+                page-break-after: auto;
+            }
+
+            /* Tipografia com contraste máximo */
+            h1, h2, h3, h4, h5 {
+                color: #000000 !important;
+                page-break-after: avoid;
+            }
+            h2 { font-size: 16pt !important; margin-top: 0 !important; }
+            h3 { font-size: 13pt !important; color: #111111 !important; }
+            h4 { font-size: 11.5pt !important; }
+            p, li, td, th, span, div {
+                color: #000000 !important;
+            }
+            .module-subtitle {
+                color: #222222 !important;
+                border-bottom-color: #333333 !important;
+            }
+
+            /* Cards e caixas com bordas escuras e fundo branco */
+            .card, .quiz-box, .note-example {
+                background: #ffffff !important;
+                border: 1px solid #333333 !important;
+                box-shadow: none !important;
+                color: #000000 !important;
+                page-break-inside: avoid;
+            }
+            .card.highlight, .card.info, .card.success {
+                border-left: 3px solid #000000 !important;
+                background: #f7f7f7 !important;
+            }
+
+            /* Tabelas legíveis */
+            table {
+                border-collapse: collapse !important;
+                width: 100% !important;
+                page-break-inside: avoid;
+            }
+            th, td {
+                border: 1px solid #333333 !important;
+                color: #000000 !important;
+                background: #ffffff !important;
+                padding: 4px 6px !important;
+            }
+            th {
+                background: #e8e8e8 !important;
+                font-weight: 700 !important;
+            }
+
+            /* SVGs e partituras: traços e preenchimentos escuros */
+            svg {
+                max-width: 100% !important;
+                height: auto !important;
+                page-break-inside: avoid;
+            }
+            svg line, svg path, svg ellipse, svg rect, svg circle, svg text {
+                stroke: #000000 !important;
+                fill: #000000 !important;
+                color: #000000 !important;
+            }
+            /* Mantém elipses de notas preenchidas escuras; linhas de pauta pretas */
+            svg ellipse[fill="#1a365d"], svg ellipse[fill="#2b6cb0"], svg ellipse[fill="#c53030"] {
+                fill: #000000 !important;
+            }
+            svg text {
+                fill: #000000 !important;
+            }
+
+            /* Fórmulas e blocos de código */
+            .formula, .note-example {
+                background: #f0f0f0 !important;
+                color: #000000 !important;
+                border: 1px solid #333 !important;
+            }
+
+            /* Quiz options */
+            .quiz-option {
+                border: 1px solid #333 !important;
+                background: #fff !important;
+                color: #000 !important;
+            }
+
+            /* Evita cortes ruins */
+            img, svg, table, .card {
+                page-break-inside: avoid;
+            }
+
+            /* Margens de página */
+            @page {
+                margin: 12mm 12mm 14mm 12mm;
+                size: A4;
+            }
+        }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .sidebar { width: 260px; }
+            .main { margin-left: 260px; padding: 1.5rem; }
+        }
+        @media (max-width: 700px) {
+            body { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                max-height: 55vh;
+            }
+            .main { margin-left: 0; }
+            .module-header { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <h1>Professor de Teoria Musical
+            <span>Curso completo e progressivo</span>
+        </h1>
+
+        <!-- Seção de impressão -->
+        <div class="pdf-section">
+            <h3>🖨️ Imprimir</h3>
+            <button class="btn-pdf" id="btnPrintAll" onclick="imprimirTodos()">Imprimir curso completo<br><small>(todos os módulos)</small></button>
+            <button class="btn-pdf secondary" id="btnPrintAtual" onclick="imprimirModuloAtual()">Imprimir módulo atual</button>
+        </div>
+
+        <div class="nav-section">Fundamentos</div>
+        <a class="nav-item active" data-module="intro">1. O que é Música</a>
+        <a class="nav-item" data-module="som">2. Propriedades do Som</a>
+        <a class="nav-item" data-module="elementos">3. Elementos Musicais</a>
+        <div class="nav-section">Notação e Leitura</div>
+        <a class="nav-item" data-module="notacao">4. Notação Musical</a>
+        <a class="nav-item" data-module="ritmo">5. Leitura Rítmica</a>
+        <a class="nav-item" data-module="melodia">6. Melodia e Solfejo</a>
+        <div class="nav-section">Harmonia</div>
+        <a class="nav-item" data-module="intervalos">7. Intervalos</a>
+        <a class="nav-item" data-module="escalas">8. Escalas e Modos</a>
+        <a class="nav-item" data-module="acordes">9. Acordes e Harmonia</a>
+        <div class="nav-section">Aprofundamento</div>
+        <a class="nav-item" data-module="forma">10. Forma e Textura</a>
+        <a class="nav-item" data-module="exercicios">11. Exercícios Integrados</a>
+        <a class="nav-item" data-module="glossario">12. Glossário</a>
+        <a class="nav-item" data-module="ethos">13. Teoria do Ethos</a>
+    </nav>
+
+    <main class="main">
+        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+        <!-- MÓDULO 1 -->
+        <section class="module active" id="intro" data-title="1. O que é Música">
+            <div class="module-header">
+                <h2>1. O que é Música</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('intro')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Definição, natureza e importância da música como linguagem organizada de sons e silêncios.</p>
+
+            <h3>Definição</h3>
+            <p>A música é a arte de organizar sons e silêncios no tempo, de maneira intencional e estruturada, com o objetivo de expressar ideias, emoções ou criar experiências estéticas. Em termos mais precisos, trata-se de um sistema de organização sonora que combina altura, duração, intensidade e timbre segundo princípios culturais, históricos e estéticos.</p>
+
+            <div class="card info">
+                <strong>Definição sintética:</strong> Música é a organização racional e lógica de sons e silêncios em composições que possuem forma, ritmo, melodia e harmonia.
+            </div>
+
+            <h3>Som musical versus ruído</h3>
+            <p>Nem todo som constitui música. Distinguimos:</p>
+            <ul>
+                <li><strong>Som musical</strong>: vibrações regulares e periódicas, que produzem uma altura definida (nota). Exemplos: piano, violino, voz cantada, flauta.</li>
+                <li><strong>Ruído</strong>: vibrações irregulares e aperiódicas, sem altura definida. Exemplos: trovões, motores, o bater de portas. O ruído pode ser utilizado musicalmente (percussão, música concreta), mas não possui altura fixa.</li>
+            </ul>
+
+            <h3>Os três pilares clássicos</h3>
+            <p>A análise tradicional ocidental organiza a música em três dimensões principais:</p>
+            <ol>
+                <li><strong>Melodia</strong> — sucessão horizontal de alturas (notas em sequência).</li>
+                <li><strong>Harmonia</strong> — combinação vertical de alturas (notas simultâneas / acordes).</li>
+                <li><strong>Ritmo</strong> — organização das durações e acentos no tempo.</li>
+            </ol>
+            <p>Além desses, a teoria contemporânea inclui textura, forma, dinâmica, agógica e timbre como elementos constitutivos essenciais.</p>
+
+            <div class="card highlight">
+                <strong>Reflexão pedagógica:</strong> A teoria musical não é um conjunto de regras arbitrárias. Trata-se da descrição sistemática das práticas musicais que se desenvolveram ao longo da história. Estudá-la permite compreender, analisar, improvisar e compor com maior consciência e precisão.
+            </div>
+
+            <h3>Por que estudar teoria musical?</h3>
+            <ul>
+                <li>Facilita a leitura e a escrita de partituras.</li>
+                <li>Desenvolve a percepção auditiva (solfejo e ditado).</li>
+                <li>Permite analisar obras e compreender estruturas harmônicas e formais.</li>
+                <li>Serve de base para improvisação, arranjo e composição.</li>
+                <li>Melhora a comunicação entre músicos (linguagem comum).</li>
+            </ul>
+        </section>
+
+        <!-- MÓDULO 2 -->
+        <section class="module" id="som" data-title="2. Propriedades do Som">
+            <div class="module-header">
+                <h2>2. Propriedades do Som</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('som')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Os quatro parâmetros fundamentais que caracterizam qualquer som musical.</p>
+
+            <p>Todo som perceptível possui quatro propriedades essenciais. Essas propriedades formam a base de toda a notação e da análise musical.</p>
+
+            <h3>1. Altura (Pitch)</h3>
+            <p>A altura é a qualidade que permite distinguir sons graves de sons agudos. Fisicamente, corresponde à <strong>frequência</strong> da onda sonora, medida em Hertz (Hz). Quanto maior a frequência, mais aguda é a percepção do som.</p>
+            <ul>
+                <li>Sons graves: frequências baixas (ex.: 50–150 Hz).</li>
+                <li>Sons agudos: frequências altas (ex.: 2.000–4.000 Hz ou mais).</li>
+            </ul>
+            <p>A unidade básica de altura na música ocidental é a <strong>nota</strong>. O sistema temperado igual divide a oitava em 12 semitons iguais.</p>
+            <div class="card">
+                <strong>Exemplo prático:</strong> A nota Lá₄ (A4) possui frequência padrão de 440 Hz. Uma oitava acima (Lá₅) vibra a 880 Hz; uma oitava abaixo (Lá₃) a 220 Hz.
+            </div>
+
+            <h3>2. Intensidade (Amplitude / Dinâmica)</h3>
+            <p>A intensidade refere-se ao volume ou força do som. Fisicamente, relaciona-se à amplitude da onda. Na notação musical, a intensidade é indicada por sinais de dinâmica, em italiano:</p>
+            <table>
+                <tr><th>Símbolo</th><th>Termo</th><th>Significado</th></tr>
+                <tr><td>pp</td><td>pianissimo</td><td>muito suave</td></tr>
+                <tr><td>p</td><td>piano</td><td>suave</td></tr>
+                <tr><td>mp</td><td>mezzo-piano</td><td>moderadamente suave</td></tr>
+                <tr><td>mf</td><td>mezzo-forte</td><td>moderadamente forte</td></tr>
+                <tr><td>f</td><td>forte</td><td>forte</td></tr>
+                <tr><td>ff</td><td>fortissimo</td><td>muito forte</td></tr>
+            </table>
+            <p>Existem ainda indicações de transição: <em>crescendo</em> (aumentar gradualmente) e <em>diminuendo</em> ou <em>decrescendo</em> (diminuir gradualmente).</p>
+
+            <h3>3. Duração</h3>
+            <p>A duração é o tempo durante o qual um som ou um silêncio se prolonga. É a propriedade que fundamenta o ritmo. Na partitura, as figuras de nota e de pausa representam valores relativos de duração (semínima, mínima, colcheia etc.).</p>
+
+            <h3>4. Timbre</h3>
+            <p>O timbre é a “cor” ou qualidade característica do som que permite distinguir a fonte sonora, mesmo quando altura, intensidade e duração são idênticas. Fisicamente, o timbre resulta do espectro harmônico (presença e intensidade dos harmônicos parciais) e do envelope temporal (ataque, sustentação e decaimento).</p>
+            <div class="card info">
+                <strong>Exemplos de timbre:</strong> Um Dó médio tocado no piano, no violino, na flauta e na voz humana possui a mesma altura, mas timbres completamente distintos.
+            </div>
+
+            <h3>Resumo das propriedades</h3>
+            <table>
+                <tr><th>Propriedade</th><th>Parâmetro físico</th><th>Percepção</th><th>Representação musical</th></tr>
+                <tr><td>Altura</td><td>Frequência</td><td>Grave ↔ Agudo</td><td>Notas no pentagrama</td></tr>
+                <tr><td>Intensidade</td><td>Amplitude</td><td>Fraco ↔ Forte</td><td>Dinâmicas (p, f, etc.)</td></tr>
+                <tr><td>Duração</td><td>Tempo</td><td>Curto ↔ Longo</td><td>Figuras rítmicas</td></tr>
+                <tr><td>Timbre</td><td>Espectro + envelope</td><td>Qualidade / cor</td><td>Instrumentação / orquestração</td></tr>
+            </table>
+        </section>
+
+        <!-- MÓDULO 3 -->
+        <section class="module" id="elementos" data-title="3. Elementos Musicais">
+            <div class="module-header">
+                <h2>3. Elementos Musicais</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('elementos')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Os componentes estruturais que organizam a música.</p>
+
+            <h3>Melodia</h3>
+            <p>A melodia é a sucessão organizada de alturas no tempo. Trata-se da dimensão “horizontal” da música. Uma melodia possui contorno (ascendente, descendente, ondulado), amplitude (intervalo entre a nota mais grave e a mais aguda) e ritmo próprio.</p>
+            <p>Elementos de uma melodia:</p>
+            <ul>
+                <li>Notas e intervalos</li>
+                <li>Frases e motivos</li>
+                <li>Clímax e resolução</li>
+                <li>Relação com a harmonia subjacente</li>
+            </ul>
+
+            <h3>Harmonia</h3>
+            <p>A harmonia é a combinação simultânea de sons (dimensão “vertical”). Estuda a formação de acordes, suas inversões, funções tonais e progressões. A harmonia ocidental tradicional baseia-se no sistema tonal (maior/menor) e nas relações de tensão e resolução (dominante → tônica).</p>
+
+            <h3>Ritmo</h3>
+            <p>O ritmo é a organização das durações e dos acentos no tempo. Inclui:</p>
+            <ul>
+                <li><strong>Pulso</strong> (ou batida): unidade regular de tempo.</li>
+                <li><strong>Compasso</strong> (métrica): agrupamento de pulsos em unidades com acento.</li>
+                <li><strong>Andamento</strong> (tempo): velocidade do pulso (Largo, Andante, Allegro etc.).</li>
+                <li><strong>Padrões rítmicos</strong>: combinações de figuras longas e curtas.</li>
+            </ul>
+
+            <h3>Outros elementos importantes</h3>
+            <ul>
+                <li><strong>Textura</strong>: densidade e relação entre as vozes (monofônica, homofônica, polifônica, heterofônica).</li>
+                <li><strong>Forma</strong>: organização macroestrutural da peça (binária, ternária, sonata, rondo, tema e variações etc.).</li>
+                <li><strong>Dinâmica e agógica</strong>: variações de intensidade e de velocidade.</li>
+                <li><strong>Articulação</strong>: modo de ataque e ligação das notas (staccato, legato, tenuto, acento).</li>
+            </ul>
+
+            <div class="card success">
+                <strong>Síntese:</strong> Melodia + Harmonia + Ritmo formam o núcleo da organização sonora. Os demais elementos (textura, forma, timbre, dinâmica) completam a experiência musical completa.
+            </div>
+        </section>
+
+        <!-- MÓDULO 4 -->
+        <section class="module" id="notacao" data-title="4. Notação Musical">
+            <div class="module-header">
+                <h2>4. Notação Musical</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('notacao')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">O sistema de escrita que registra altura, duração e outros parâmetros.</p>
+
+            <h3>O pentagrama (pauta) — Explicação detalhada</h3>
+            <p>O <strong>pentagrama</strong> (também chamado de pauta) é o sistema gráfico fundamental da notação musical ocidental. Ele é constituído por <strong>cinco linhas horizontais paralelas</strong> e os <strong>quatro espaços</strong> situados entre elas. As linhas e os espaços são contados de baixo para cima:</p>
+            <ul>
+                <li><strong>1ª linha</strong> (mais grave) → 1º espaço → 2ª linha → 2º espaço → 3ª linha → 3º espaço → 4ª linha → 4º espaço → <strong>5ª linha</strong> (mais aguda).</li>
+            </ul>
+            <p>As notas musicais são posicionadas sobre as linhas ou nos espaços. Quanto mais alta a posição no pentagrama, mais aguda é a nota; quanto mais baixa, mais grave.</p>
+            <p>Quando a melodia ultrapassa os limites das cinco linhas, utilizam-se <strong>linhas suplementares</strong> (curtas linhas horizontais adicionadas acima ou abaixo do pentagrama). O Dó central (C4), por exemplo, situa-se em uma linha suplementar entre as claves de Sol e de Fá.</p>
+
+            <div class="card info">
+                <strong>Importante:</strong> O pentagrama sozinho não define as alturas absolutas. É a <strong>clave</strong> colocada no início da pauta que atribui nomes específicos às linhas e aos espaços.
+            </div>
+
+            <h3>Claves — Representação visual com as notas</h3>
+            <p>A clave é o símbolo que fixa a altura de referência de uma das linhas do pentagrama. As três claves principais são: <strong>Clave de Sol</strong>, <strong>Clave de Fá</strong> e <strong>Clave de Dó</strong>.</p>
+
+            <!-- CLAVE DE SOL -->
+            <h4>1. Clave de Sol (2ª linha)</h4>
+            <p>A clave de Sol (𝄞) é a mais utilizada para instrumentos e vozes de registro médio-agudo (violino, flauta, trompete, soprano, contralto, etc.). O centro da espiral da clave aponta para a <strong>2ª linha</strong>, que representa a nota <strong>Sol₄</strong> (G4).</p>
+            
+            <div class="card" style="overflow-x:auto; text-align:center; background:#fafafa;">
+                <p style="margin-bottom:8px; font-weight:600; color:#1a365d;">Pentagrama em Clave de Sol — Notas nas linhas e espaços</p>
+                <svg width="520" height="160" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <!-- Staff lines -->
+                    <line x1="40" y1="40" x2="500" y2="40" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="55" x2="500" y2="55" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="70" x2="500" y2="70" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="85" x2="500" y2="85" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="100" x2="500" y2="100" stroke="#222" stroke-width="1.5"/>
+                    <!-- Treble clef (simplified) -->
+                    <text x="45" y="95" font-size="70" font-family="serif" fill="#1a365d">𝄞</text>
+                    <!-- Notes on lines (from bottom): Mi, Sol, Si, Ré, Fá -->
+                    <ellipse cx="130" cy="100" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="122" y="125" font-size="12" fill="#333">Mi</text>
+                    <ellipse cx="180" cy="85" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="172" y="125" font-size="12" fill="#333">Sol</text>
+                    <ellipse cx="230" cy="70" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="222" y="125" font-size="12" fill="#333">Si</text>
+                    <ellipse cx="280" cy="55" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="272" y="125" font-size="12" fill="#333">Ré</text>
+                    <ellipse cx="330" cy="40" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="322" y="125" font-size="12" fill="#333">Fá</text>
+                    <!-- Notes on spaces: Fá, Lá, Dó, Mi -->
+                    <ellipse cx="380" cy="92.5" rx="9" ry="7" fill="#2b6cb0"/>
+                    <text x="372" y="125" font-size="12" fill="#2b6cb0">Fá</text>
+                    <ellipse cx="430" cy="77.5" rx="9" ry="7" fill="#2b6cb0"/>
+                    <text x="422" y="125" font-size="12" fill="#2b6cb0">Lá</text>
+                    <ellipse cx="480" cy="62.5" rx="9" ry="7" fill="#2b6cb0"/>
+                    <text x="472" y="125" font-size="12" fill="#2b6cb0">Dó</text>
+                </svg>
+                <p style="font-size:0.9rem; color:#4a5568; margin-top:6px;">
+                    <span style="color:#1a365d;">● Linhas (de baixo para cima):</span> Mi – Sol – Si – Ré – Fá &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <span style="color:#2b6cb0;">● Espaços:</span> Fá – Lá – Dó – Mi
+                </p>
+                <p style="font-size:0.85rem; color:#718096;">Dó central (C4) fica em linha suplementar abaixo da 1ª linha.</p>
+            </div>
+
+            <!-- CLAVE DE FÁ -->
+            <h4>2. Clave de Fá (4ª linha)</h4>
+            <p>A clave de Fá (𝄢) é utilizada para instrumentos e vozes graves (violoncelo, fagote, trombone baixo, baixo, etc.). Os dois pontos da clave cercam a <strong>4ª linha</strong>, que representa a nota <strong>Fá₃</strong> (F3).</p>
+
+            <div class="card" style="overflow-x:auto; text-align:center; background:#fafafa;">
+                <p style="margin-bottom:8px; font-weight:600; color:#1a365d;">Pentagrama em Clave de Fá — Notas nas linhas e espaços</p>
+                <svg width="520" height="160" viewBox="0 0 520 160" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <!-- Staff lines -->
+                    <line x1="40" y1="40" x2="500" y2="40" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="55" x2="500" y2="55" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="70" x2="500" y2="70" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="85" x2="500" y2="85" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="100" x2="500" y2="100" stroke="#222" stroke-width="1.5"/>
+                    <!-- Bass clef -->
+                    <text x="48" y="88" font-size="58" font-family="serif" fill="#1a365d">𝄢</text>
+                    <!-- Notes on lines (from bottom): Sol, Si, Ré, Fá, Lá -->
+                    <ellipse cx="140" cy="100" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="132" y="125" font-size="12" fill="#333">Sol</text>
+                    <ellipse cx="190" cy="85" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="182" y="125" font-size="12" fill="#333">Si</text>
+                    <ellipse cx="240" cy="70" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="232" y="125" font-size="12" fill="#333">Ré</text>
+                    <ellipse cx="290" cy="55" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="282" y="125" font-size="12" fill="#333">Fá</text>
+                    <ellipse cx="340" cy="40" rx="9" ry="7" fill="#1a365d"/>
+                    <text x="332" y="125" font-size="12" fill="#333">Lá</text>
+                    <!-- Notes on spaces: Lá, Dó, Mi, Sol -->
+                    <ellipse cx="390" cy="92.5" rx="9" ry="7" fill="#2b6cb0"/>
+                    <text x="382" y="125" font-size="12" fill="#2b6cb0">Lá</text>
+                    <ellipse cx="440" cy="77.5" rx="9" ry="7" fill="#2b6cb0"/>
+                    <text x="432" y="125" font-size="12" fill="#2b6cb0">Dó</text>
+                    <ellipse cx="490" cy="62.5" rx="9" ry="7" fill="#2b6cb0"/>
+                    <text x="482" y="125" font-size="12" fill="#2b6cb0">Mi</text>
+                </svg>
+                <p style="font-size:0.9rem; color:#4a5568; margin-top:6px;">
+                    <span style="color:#1a365d;">● Linhas (de baixo para cima):</span> Sol – Si – Ré – Fá – Lá &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <span style="color:#2b6cb0;">● Espaços:</span> Lá – Dó – Mi – Sol
+                </p>
+                <p style="font-size:0.85rem; color:#718096;">Dó central (C4) fica em linha suplementar acima da 5ª linha.</p>
+            </div>
+
+            <!-- CLAVE DE DÓ -->
+            <h4>3. Clave de Dó (posições variáveis)</h4>
+            <p>A clave de Dó (𝄡) indica que a linha sobre a qual ela está centrada corresponde à nota <strong>Dó₄</strong> (C4 – Dó central). Suas posições mais comuns são:</p>
+            <ul>
+                <li><strong>Clave de Dó na 3ª linha</strong> (clave de Contralto) — usada principalmente pela viola.</li>
+                <li><strong>Clave de Dó na 4ª linha</strong> (clave de Tenor) — usada por trombones, fagotes e violoncelos em passagens agudas, e por vozes de tenor.</li>
+            </ul>
+
+            <div class="card" style="overflow-x:auto; text-align:center; background:#fafafa;">
+                <p style="margin-bottom:8px; font-weight:600; color:#1a365d;">Clave de Dó na 3ª linha (Contralto)</p>
+                <svg width="480" height="150" viewBox="0 0 480 150" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <line x1="40" y1="35" x2="460" y2="35" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="50" x2="460" y2="50" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="65" x2="460" y2="65" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="80" x2="460" y2="80" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="95" x2="460" y2="95" stroke="#222" stroke-width="1.5"/>
+                    <text x="45" y="85" font-size="52" font-family="serif" fill="#1a365d">𝄡</text>
+                    <!-- Notes: lines from bottom Fa, La, Do, Mi, Sol -->
+                    <ellipse cx="130" cy="95" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="122" y="120" font-size="11" fill="#333">Fá</text>
+                    <ellipse cx="180" cy="80" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="172" y="120" font-size="11" fill="#333">Lá</text>
+                    <ellipse cx="230" cy="65" rx="8" ry="6" fill="#c53030"/>
+                    <text x="220" y="120" font-size="11" fill="#c53030">Dó</text>
+                    <ellipse cx="280" cy="50" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="272" y="120" font-size="11" fill="#333">Mi</text>
+                    <ellipse cx="330" cy="35" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="322" y="120" font-size="11" fill="#333">Sol</text>
+                    <ellipse cx="380" cy="87.5" rx="8" ry="6" fill="#2b6cb0"/>
+                    <text x="372" y="120" font-size="11" fill="#2b6cb0">Sol</text>
+                    <ellipse cx="430" cy="72.5" rx="8" ry="6" fill="#2b6cb0"/>
+                    <text x="422" y="120" font-size="11" fill="#2b6cb0">Si</text>
+                </svg>
+                <p style="font-size:0.85rem; color:#718096;">A 3ª linha (em vermelho) é o Dó central. Linhas: Fá – Lá – Dó – Mi – Sol.</p>
+            </div>
+
+            <div class="card" style="overflow-x:auto; text-align:center; background:#fafafa; margin-top:1rem;">
+                <p style="margin-bottom:8px; font-weight:600; color:#1a365d;">Clave de Dó na 4ª linha (Tenor)</p>
+                <svg width="480" height="150" viewBox="0 0 480 150" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <line x1="40" y1="35" x2="460" y2="35" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="50" x2="460" y2="50" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="65" x2="460" y2="65" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="80" x2="460" y2="80" stroke="#222" stroke-width="1.5"/>
+                    <line x1="40" y1="95" x2="460" y2="95" stroke="#222" stroke-width="1.5"/>
+                    <text x="45" y="100" font-size="52" font-family="serif" fill="#1a365d">𝄡</text>
+                    <!-- Notes: lines from bottom Ré, Fá, Lá, Dó, Mi -->
+                    <ellipse cx="130" cy="95" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="122" y="120" font-size="11" fill="#333">Ré</text>
+                    <ellipse cx="180" cy="80" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="172" y="120" font-size="11" fill="#333">Fá</text>
+                    <ellipse cx="230" cy="65" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="222" y="120" font-size="11" fill="#333">Lá</text>
+                    <ellipse cx="280" cy="50" rx="8" ry="6" fill="#c53030"/>
+                    <text x="270" y="120" font-size="11" fill="#c53030">Dó</text>
+                    <ellipse cx="330" cy="35" rx="8" ry="6" fill="#1a365d"/>
+                    <text x="322" y="120" font-size="11" fill="#333">Mi</text>
+                    <ellipse cx="380" cy="87.5" rx="8" ry="6" fill="#2b6cb0"/>
+                    <text x="372" y="120" font-size="11" fill="#2b6cb0">Mi</text>
+                    <ellipse cx="430" cy="72.5" rx="8" ry="6" fill="#2b6cb0"/>
+                    <text x="422" y="120" font-size="11" fill="#2b6cb0">Sol</text>
+                </svg>
+                <p style="font-size:0.85rem; color:#718096;">A 4ª linha (em vermelho) é o Dó central. Linhas: Ré – Fá – Lá – Dó – Mi.</p>
+            </div>
+
+            <div class="card highlight">
+                <strong>Resumo prático das claves:</strong>
+                <ul style="margin-bottom:0;">
+                    <li><strong>Clave de Sol</strong> → 2ª linha = Sol₄ (mais comum para melodia aguda/média).</li>
+                    <li><strong>Clave de Fá</strong> → 4ª linha = Fá₃ (registro grave).</li>
+                    <li><strong>Clave de Dó</strong> → a linha do centro da clave = Dó₄ (registro intermediário).</li>
+                </ul>
+            </div>
+
+            <h3>Figuras de valor (notas e pausas)</h3>
+            <table>
+                <tr><th>Figura</th><th>Nome</th><th>Valor relativo (em 4/4)</th><th>Pausa correspondente</th></tr>
+                <tr><td>𝅝</td><td>Semibreve</td><td>4 tempos</td><td>//</td></tr>
+                <tr><td>𝅗𝅥</td><td>Mínima</td><td>2 tempos</td><td>—</td></tr>
+                <tr><td>♩</td><td>Semínima</td><td>1 tempo</td><td>𝄽</td></tr>
+                <tr><td>♪</td><td>Colcheia</td><td>½ tempo</td><td>𝄾</td></tr>
+                <tr><td>♬</td><td>Semicolcheia</td><td>¼ tempo</td><td>⭍</td></tr>
+            </table>
+            <p>O <strong>ponto de aumento</strong> acrescenta metade do valor da figura. A <strong>ligadura de valor</strong> une duas notas da mesma altura, somando suas durações.</p>
+
+            <h3>Compasso e fórmula de compasso</h3>
+            <p>O compasso é indicado por uma fração no início da pauta:</p>
+            <ul>
+                <li>Numerador: número de unidades de tempo por compasso.</li>
+                <li>Denominador: figura que vale um tempo (4 = semínima, 8 = colcheia etc.).</li>
+            </ul>
+            <p>Exemplos: 4/4 (compasso quaternário simples), 3/4 (ternário simples), 6/8 (binário composto).</p>
+
+            <h3>Acidentes</h3>
+            <ul>
+                <li>♯ Sustenido: eleva a nota em um semitom.</li>
+                <li>♭ Bemol: abaixa a nota em um semitom.</li>
+                <li>♮ Bequadro: cancela o acidente anterior.</li>
+                <li>♯♯ / ♭♭: dobrado sustenido / dobrado bemol (um tom inteiro).</li>
+            </ul>
+            <p>Acidentes podem ser <strong>ocorrentes</strong> (válidos apenas no compasso) ou <strong>da armadura</strong> (válidos durante toda a peça até nova armadura).</p>
+        </section>
+
+        <!-- MÓDULO 5 -->
+        <section class="module" id="ritmo" data-title="5. Leitura Rítmica">
+            <div class="module-header">
+                <h2>5. Leitura Rítmica — Figuras e Valores</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('ritmo')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Estudo detalhado das figuras de duração, pausas, relações de valor, pontuação, ligaduras e exercícios práticos de leitura rítmica.</p>
+
+            <h3>1. O que são figuras rítmicas?</h3>
+            <p>As <strong>figuras rítmicas</strong> (ou figuras de valor) são os símbolos que representam a <strong>duração relativa</strong> de um som ou de um silêncio. Elas não indicam uma duração absoluta em segundos, mas sim uma relação proporcional entre si. A unidade de referência é definida pela fórmula de compasso e pelo andamento (metrônomo).</p>
+            <p>Cada figura de nota possui uma <strong>pausa</strong> correspondente, que representa silêncio da mesma duração.</p>
+
+            <h3>2. As figuras principais — Desenho e valores</h3>
+            <p>Abaixo estão as figuras mais utilizadas, com seu desenho, nome, valor relativo (tomando a semínima = 1 tempo) e a pausa correspondente.</p>
+
+            <!-- SEMIBREVE -->
+            <div class="card" style="margin-bottom:1.5rem;">
+                <h4 style="margin-top:0; color:#1a365d;">Semibreve (Whole Note) — 4 tempos</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:center;">
+                    <svg width="80" height="60" viewBox="0 0 80 60">
+                        <ellipse cx="40" cy="30" rx="22" ry="14" fill="none" stroke="#1a365d" stroke-width="3"/>
+                    </svg>
+                    <div>
+                        <p style="margin:0;"><strong>Nota:</strong> oval oca (sem haste)</p>
+                        <p style="margin:4px 0;"><strong>Pausa:</strong> retângulo suspenso sob a 4ª linha</p>
+                        <svg width="60" height="50" viewBox="0 0 60 50" style="margin-top:4px;">
+                            <rect x="20" y="12" width="20" height="8" fill="#1a365d"/>
+                        </svg>
+                    </div>
+                    <div style="background:#edf2f7; padding:10px 14px; border-radius:6px; font-size:0.9rem;">
+                        Vale <strong>4 tempos</strong> em 4/4<br>
+                        Equivale a 2 mínimas ou 4 semínimas
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÍNIMA -->
+            <div class="card" style="margin-bottom:1.5rem;">
+                <h4 style="margin-top:0; color:#1a365d;">Mínima (Half Note) — 2 tempos</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:center;">
+                    <svg width="70" height="90" viewBox="0 0 70 90">
+                        <ellipse cx="28" cy="55" rx="16" ry="11" fill="none" stroke="#1a365d" stroke-width="2.5"/>
+                        <line x1="44" y1="55" x2="44" y2="15" stroke="#1a365d" stroke-width="2.5"/>
+                    </svg>
+                    <div>
+                        <p style="margin:0;"><strong>Nota:</strong> oval oca + haste vertical</p>
+                        <p style="margin:4px 0;"><strong>Pausa:</strong> retângulo apoiado sobre a 3ª linha</p>
+                        <svg width="60" height="50" viewBox="0 0 60 50" style="margin-top:4px;">
+                            <rect x="20" y="28" width="20" height="8" fill="#1a365d"/>
+                        </svg>
+                    </div>
+                    <div style="background:#edf2f7; padding:10px 14px; border-radius:6px; font-size:0.9rem;">
+                        Vale <strong>2 tempos</strong> em 4/4<br>
+                        Equivale a 2 semínimas ou 4 colcheias
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMÍNIMA -->
+            <div class="card" style="margin-bottom:1.5rem;">
+                <h4 style="margin-top:0; color:#1a365d;">Semínima (Quarter Note) — 1 tempo</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:center;">
+                    <svg width="70" height="90" viewBox="0 0 70 90">
+                        <ellipse cx="28" cy="55" rx="16" ry="11" fill="#1a365d"/>
+                        <line x1="44" y1="55" x2="44" y2="15" stroke="#1a365d" stroke-width="2.5"/>
+                    </svg>
+                    <div>
+                        <p style="margin:0;"><strong>Nota:</strong> oval preenchida + haste</p>
+                        <p style="margin:4px 0;"><strong>Pausa:</strong> símbolo em forma de “raio” ou zigue-zague</p>
+                        <svg width="50" height="50" viewBox="0 0 50 50" style="margin-top:4px;">
+                            <path d="M22 10 L28 22 L20 28 L30 42" fill="none" stroke="#1a365d" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div style="background:#edf2f7; padding:10px 14px; border-radius:6px; font-size:0.9rem;">
+                        Vale <strong>1 tempo</strong> em 4/4<br>
+                        É a unidade de tempo mais comum<br>
+                        Equivale a 2 colcheias
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLCHEIA -->
+            <div class="card" style="margin-bottom:1.5rem;">
+                <h4 style="margin-top:0; color:#1a365d;">Colcheia (Eighth Note) — ½ tempo</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:center;">
+                    <svg width="80" height="90" viewBox="0 0 80 90">
+                        <ellipse cx="28" cy="55" rx="15" ry="10" fill="#1a365d"/>
+                        <line x1="43" y1="55" x2="43" y2="15" stroke="#1a365d" stroke-width="2.5"/>
+                        <path d="M43 15 Q58 22 55 38" fill="none" stroke="#1a365d" stroke-width="2.5"/>
+                    </svg>
+                    <div>
+                        <p style="margin:0;"><strong>Nota:</strong> oval preenchida + haste + uma bandeirola (ou barra)</p>
+                        <p style="margin:4px 0;"><strong>Pausa:</strong> símbolo semelhante a um “7” com gancho</p>
+                        <svg width="50" height="50" viewBox="0 0 50 50" style="margin-top:4px;">
+                            <path d="M18 12 L32 12 L25 28 L30 28" fill="none" stroke="#1a365d" stroke-width="2.5" stroke-linecap="round"/>
+                            <path d="M25 28 Q20 35 22 42" fill="none" stroke="#1a365d" stroke-width="2.5"/>
+                        </svg>
+                    </div>
+                    <div style="background:#edf2f7; padding:10px 14px; border-radius:6px; font-size:0.9rem;">
+                        Vale <strong>½ tempo</strong> (meio tempo)<br>
+                        Duas colcheias = 1 semínima<br>
+                        Quando agrupadas, as bandeirolas viram barras
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEMICOLCHEIA -->
+            <div class="card" style="margin-bottom:1.5rem;">
+                <h4 style="margin-top:0; color:#1a365d;">Semicolcheia (Sixteenth Note) — ¼ tempo</h4>
+                <div style="display:flex; flex-wrap:wrap; gap:2rem; align-items:center;">
+                    <svg width="80" height="90" viewBox="0 0 80 90">
+                        <ellipse cx="28" cy="55" rx="15" ry="10" fill="#1a365d"/>
+                        <line x1="43" y1="55" x2="43" y2="15" stroke="#1a365d" stroke-width="2.5"/>
+                        <path d="M43 15 Q58 20 55 32" fill="none" stroke="#1a365d" stroke-width="2.5"/>
+                        <path d="M43 25 Q58 30 55 42" fill="none" stroke="#1a365d" stroke-width="2.5"/>
+                    </svg>
+                    <div>
+                        <p style="margin:0;"><strong>Nota:</strong> oval preenchida + haste + <strong>duas</strong> bandeirolas</p>
+                        <p style="margin:4px 0;"><strong>Pausa:</strong> semelhante à da colcheia, com dois ganchos</p>
+                        <svg width="50" height="55" viewBox="0 0 50 55" style="margin-top:4px;">
+                            <path d="M18 10 L32 10 L25 22 L30 22" fill="none" stroke="#1a365d" stroke-width="2.2" stroke-linecap="round"/>
+                            <path d="M25 22 Q20 28 22 34" fill="none" stroke="#1a365d" stroke-width="2.2"/>
+                            <path d="M18 18 L30 18" fill="none" stroke="#1a365d" stroke-width="2.2"/>
+                            <path d="M25 28 Q20 34 22 40" fill="none" stroke="#1a365d" stroke-width="2.2"/>
+                        </svg>
+                    </div>
+                    <div style="background:#edf2f7; padding:10px 14px; border-radius:6px; font-size:0.9rem;">
+                        Vale <strong>¼ de tempo</strong><br>
+                        Quatro semicolcheias = 1 semínima<br>
+                        Duas semicolcheias = 1 colcheia
+                    </div>
+                </div>
+            </div>
+
+            <!-- FUSA (opcional breve) -->
+            <div class="card" style="margin-bottom:1.5rem;">
+                <h4 style="margin-top:0; color:#1a365d;">Fusa (Thirty-second Note) — ⅛ tempo</h4>
+                <p>Possui <strong>três bandeirolas</strong>. Vale metade de uma semicolcheia. É menos frequente em repertório iniciante, mas aparece em passagens rápidas.</p>
+            </div>
+
+            <h3>3. Tabela comparativa de valores</h3>
+            <table>
+                <tr>
+                    <th>Figura</th>
+                    <th>Nome</th>
+                    <th>Valor (semínima = 1)</th>
+                    <th>Equivalências</th>
+                </tr>
+                <tr>
+                    <td>𝅝</td>
+                    <td>Semibreve</td>
+                    <td>4</td>
+                    <td>2 mínimas | 4 semínimas | 8 colcheias</td>
+                </tr>
+                <tr>
+                    <td>𝅗𝅥</td>
+                    <td>Mínima</td>
+                    <td>2</td>
+                    <td>2 semínimas | 4 colcheias | 8 semicolcheias</td>
+                </tr>
+                <tr>
+                    <td>♩</td>
+                    <td>Semínima</td>
+                    <td>1</td>
+                    <td>2 colcheias | 4 semicolcheias</td>
+                </tr>
+                <tr>
+                    <td>♪</td>
+                    <td>Colcheia</td>
+                    <td>0,5</td>
+                    <td>2 semicolcheias | 4 fusas</td>
+                </tr>
+                <tr>
+                    <td>♬</td>
+                    <td>Semicolcheia</td>
+                    <td>0,25</td>
+                    <td>2 fusas</td>
+                </tr>
+            </table>
+
+            <h3>4. Ponto de aumento (figura pontuada)</h3>
+            <p>O <strong>ponto de aumento</strong> colocado à direita de uma figura acrescenta <strong>metade do valor</strong> da figura original.</p>
+            <ul>
+                <li>Semínima pontuada = 1 + 0,5 = <strong>1,5 tempos</strong> (equivale a 3 colcheias)</li>
+                <li>Mínima pontuada = 2 + 1 = <strong>3 tempos</strong></li>
+                <li>Colcheia pontuada = 0,5 + 0,25 = <strong>0,75 tempo</strong></li>
+            </ul>
+            <div class="card info">
+                <strong>Regra:</strong> Cada ponto adicional acrescenta metade do valor do ponto anterior (ponto duplo = +½ +¼ do valor original).
+            </div>
+
+            <h3>5. Ligadura de valor (tie)</h3>
+            <p>A <strong>ligadura de valor</strong> é uma linha curva que une duas ou mais notas da <strong>mesma altura</strong>. Os valores são somados e o som é mantido sem nova articulação.</p>
+            <p>Exemplo: semínima ligada a uma colcheia = 1,5 tempos (mesmo valor da semínima pontuada, mas com possibilidade de cruzar a barra de compasso).</p>
+
+            <h3>6. Compassos simples e compostos</h3>
+            <ul>
+                <li><strong>Compasso simples</strong>: cada tempo divide-se naturalmente em <strong>duas</strong> partes iguais (2/4, 3/4, 4/4). Unidade de tempo geralmente é a semínima.</li>
+                <li><strong>Compasso composto</strong>: cada tempo divide-se em <strong>três</strong> partes iguais (6/8, 9/8, 12/8). Unidade de tempo geralmente é a semínima pontuada ou a mínima pontuada.</li>
+            </ul>
+            <p>Em 4/4 conta-se: <em>1 e 2 e 3 e 4 e</em>. Em 6/8 conta-se frequentemente: <em>1 la li 2 la li</em> (dois grupos de três colcheias).</p>
+
+            <h3>7. Síncope e contratempo</h3>
+            <p><strong>Síncope</strong>: som que começa em tempo (ou parte) fraco e prolonga-se até o tempo forte seguinte, deslocando o acento métrico esperado.</p>
+            <p><strong>Contratempo</strong>: execução de sons somente nos tempos ou partes fracas, com silêncio nos tempos fortes.</p>
+
+            <h3>8. Quiálteras (grupos irregulares)</h3>
+            <p>Quiálteras são divisões que não seguem a divisão binária ou ternária normal do tempo. A mais comum é a <strong>tercina</strong> (três notas iguais no tempo de duas). Também existem quiálteras de 5, 6, 7 etc.</p>
+            <p>Exemplo clássico: três colcheias em tercina ocupam o tempo de duas colcheias normais (ou seja, o tempo de uma semínima).</p>
+
+            <h3>9. Exercícios práticos de leitura rítmica</h3>
+            <p>Pratique a leitura dos exemplos abaixo. Bata o pulso com o pé e conte em voz alta. Todos os exemplos estão em <strong>compasso 4/4</strong>.</p>
+
+            <!-- PARTITURA 1: Semínimas -->
+            <div class="card" style="text-align:center; background:#fafafa;">
+                <p style="font-weight:600; color:#1a365d; margin-bottom:8px;">Exemplo 1 — Apenas semínimas (conte: 1 2 3 4)</p>
+                <svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <!-- Staff -->
+                    <line x1="40" y1="30" x2="460" y2="30" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="42" x2="460" y2="42" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="54" x2="460" y2="54" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="66" x2="460" y2="66" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="78" x2="460" y2="78" stroke="#333" stroke-width="1.2"/>
+                    <!-- Clefs & time -->
+                    <text x="45" y="72" font-size="42" fill="#1a365d">𝄞</text>
+                    <text x="85" y="50" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <text x="85" y="70" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <!-- Bar line -->
+                    <line x1="105" y1="28" x2="105" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <!-- 4 quarter notes -->
+                    <ellipse cx="140" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="149" y1="66" x2="149" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="200" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="209" y1="66" x2="209" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="260" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="269" y1="66" x2="269" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="320" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="329" y1="66" x2="329" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <!-- End bar -->
+                    <line x1="360" y1="28" x2="360" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <line x1="366" y1="28" x2="366" y2="80" stroke="#333" stroke-width="3"/>
+                    <!-- Counts -->
+                    <text x="136" y="100" font-size="13" fill="#4a5568">1</text>
+                    <text x="196" y="100" font-size="13" fill="#4a5568">2</text>
+                    <text x="256" y="100" font-size="13" fill="#4a5568">3</text>
+                    <text x="316" y="100" font-size="13" fill="#4a5568">4</text>
+                </svg>
+            </div>
+
+            <!-- PARTITURA 2: Colcheias -->
+            <div class="card" style="text-align:center; background:#fafafa;">
+                <p style="font-weight:600; color:#1a365d; margin-bottom:8px;">Exemplo 2 — Colcheias agrupadas (conte: 1 e 2 e 3 e 4 e)</p>
+                <svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <line x1="40" y1="30" x2="460" y2="30" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="42" x2="460" y2="42" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="54" x2="460" y2="54" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="66" x2="460" y2="66" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="78" x2="460" y2="78" stroke="#333" stroke-width="1.2"/>
+                    <text x="45" y="72" font-size="42" fill="#1a365d">𝄞</text>
+                    <text x="85" y="50" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <text x="85" y="70" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <line x1="105" y1="28" x2="105" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <!-- 8 eighth notes with beams -->
+                    <!-- Group 1 -->
+                    <ellipse cx="130" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="138" y1="66" x2="138" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="160" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="168" y1="66" x2="168" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <line x1="138" y1="28" x2="168" y2="28" stroke="#1a365d" stroke-width="3"/>
+                    <!-- Group 2 -->
+                    <ellipse cx="200" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="208" y1="66" x2="208" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="230" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="238" y1="66" x2="238" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <line x1="208" y1="28" x2="238" y2="28" stroke="#1a365d" stroke-width="3"/>
+                    <!-- Group 3 -->
+                    <ellipse cx="270" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="278" y1="66" x2="278" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="300" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="308" y1="66" x2="308" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <line x1="278" y1="28" x2="308" y2="28" stroke="#1a365d" stroke-width="3"/>
+                    <!-- Group 4 -->
+                    <ellipse cx="340" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="348" y1="66" x2="348" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="370" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="378" y1="66" x2="378" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <line x1="348" y1="28" x2="378" y2="28" stroke="#1a365d" stroke-width="3"/>
+                    <line x1="400" y1="28" x2="400" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <line x1="406" y1="28" x2="406" y2="80" stroke="#333" stroke-width="3"/>
+                    <text x="126" y="100" font-size="11" fill="#4a5568">1</text>
+                    <text x="156" y="100" font-size="11" fill="#4a5568">e</text>
+                    <text x="196" y="100" font-size="11" fill="#4a5568">2</text>
+                    <text x="226" y="100" font-size="11" fill="#4a5568">e</text>
+                    <text x="266" y="100" font-size="11" fill="#4a5568">3</text>
+                    <text x="296" y="100" font-size="11" fill="#4a5568">e</text>
+                    <text x="336" y="100" font-size="11" fill="#4a5568">4</text>
+                    <text x="366" y="100" font-size="11" fill="#4a5568">e</text>
+                </svg>
+            </div>
+
+            <!-- PARTITURA 3: Mistura com pausas -->
+            <div class="card" style="text-align:center; background:#fafafa;">
+                <p style="font-weight:600; color:#1a365d; margin-bottom:8px;">Exemplo 3 — Semínimas e pausas de semínima</p>
+                <svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <line x1="40" y1="30" x2="460" y2="30" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="42" x2="460" y2="42" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="54" x2="460" y2="54" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="66" x2="460" y2="66" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="78" x2="460" y2="78" stroke="#333" stroke-width="1.2"/>
+                    <text x="45" y="72" font-size="42" fill="#1a365d">𝄞</text>
+                    <text x="85" y="50" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <text x="85" y="70" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <line x1="105" y1="28" x2="105" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <!-- Note, rest, note, rest -->
+                    <ellipse cx="145" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="154" y1="66" x2="154" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <!-- Quarter rest -->
+                    <path d="M195 35 L205 48 L195 55 L208 72" fill="none" stroke="#1a365d" stroke-width="2.5" stroke-linecap="round"/>
+                    <ellipse cx="250" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="259" y1="66" x2="259" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <path d="M300 35 L310 48 L300 55 L313 72" fill="none" stroke="#1a365d" stroke-width="2.5" stroke-linecap="round"/>
+                    <line x1="340" y1="28" x2="340" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <line x1="346" y1="28" x2="346" y2="80" stroke="#333" stroke-width="3"/>
+                    <text x="141" y="100" font-size="13" fill="#4a5568">1</text>
+                    <text x="195" y="100" font-size="13" fill="#718096">(2)</text>
+                    <text x="246" y="100" font-size="13" fill="#4a5568">3</text>
+                    <text x="300" y="100" font-size="13" fill="#718096">(4)</text>
+                </svg>
+                <p style="font-size:0.85rem; color:#718096;">Os números entre parênteses indicam os tempos de silêncio (pausas).</p>
+            </div>
+
+            <!-- PARTITURA 4: Pontuadas e colcheias -->
+            <div class="card" style="text-align:center; background:#fafafa;">
+                <p style="font-weight:600; color:#1a365d; margin-bottom:8px;">Exemplo 4 — Semínima pontuada + colcheia (ritmo clássico)</p>
+                <svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <line x1="40" y1="30" x2="460" y2="30" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="42" x2="460" y2="42" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="54" x2="460" y2="54" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="66" x2="460" y2="66" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="78" x2="460" y2="78" stroke="#333" stroke-width="1.2"/>
+                    <text x="45" y="72" font-size="42" fill="#1a365d">𝄞</text>
+                    <text x="85" y="50" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <text x="85" y="70" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <line x1="105" y1="28" x2="105" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <!-- Dotted quarter + eighth (twice) -->
+                    <ellipse cx="145" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="154" y1="66" x2="154" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <circle cx="168" cy="66" r="2.5" fill="#1a365d"/>
+                    <ellipse cx="200" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="208" y1="66" x2="208" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <path d="M208 28 Q220 34 218 46" fill="none" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="260" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="269" y1="66" x2="269" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <circle cx="283" cy="66" r="2.5" fill="#1a365d"/>
+                    <ellipse cx="315" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="323" y1="66" x2="323" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <path d="M323 28 Q335 34 333 46" fill="none" stroke="#1a365d" stroke-width="2"/>
+                    <line x1="355" y1="28" x2="355" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <line x1="361" y1="28" x2="361" y2="80" stroke="#333" stroke-width="3"/>
+                    <text x="140" y="100" font-size="12" fill="#4a5568">1</text>
+                    <text x="195" y="100" font-size="12" fill="#4a5568">e</text>
+                    <text x="255" y="100" font-size="12" fill="#4a5568">3</text>
+                    <text x="310" y="100" font-size="12" fill="#4a5568">e</text>
+                </svg>
+                <p style="font-size:0.85rem; color:#718096;">A semínima pontuada ocupa 1½ tempo; a colcheia completa o segundo (ou quarto) tempo.</p>
+            </div>
+
+            <!-- PARTITURA 5: Síncope simples -->
+            <div class="card" style="text-align:center; background:#fafafa;">
+                <p style="font-weight:600; color:#1a365d; margin-bottom:8px;">Exemplo 5 — Síncope básica (colcheia + semínima + colcheia)</p>
+                <svg width="480" height="110" viewBox="0 0 480 110" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+                    <line x1="40" y1="30" x2="460" y2="30" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="42" x2="460" y2="42" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="54" x2="460" y2="54" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="66" x2="460" y2="66" stroke="#333" stroke-width="1.2"/>
+                    <line x1="40" y1="78" x2="460" y2="78" stroke="#333" stroke-width="1.2"/>
+                    <text x="45" y="72" font-size="42" fill="#1a365d">𝄞</text>
+                    <text x="85" y="50" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <text x="85" y="70" font-size="18" font-weight="bold" fill="#1a365d">4</text>
+                    <line x1="105" y1="28" x2="105" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <!-- Eighth, quarter, eighth | eighth, quarter, eighth -->
+                    <ellipse cx="135" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="143" y1="66" x2="143" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <path d="M143 28 Q155 34 153 46" fill="none" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="185" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="194" y1="66" x2="194" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="240" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="248" y1="66" x2="248" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <path d="M248 28 Q260 34 258 46" fill="none" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="295" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="303" y1="66" x2="303" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <path d="M303 28 Q315 34 313 46" fill="none" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="345" cy="66" rx="9" ry="7" fill="#1a365d"/>
+                    <line x1="354" y1="66" x2="354" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <ellipse cx="400" cy="66" rx="8" ry="6" fill="#1a365d"/>
+                    <line x1="408" y1="66" x2="408" y2="28" stroke="#1a365d" stroke-width="2"/>
+                    <path d="M408 28 Q420 34 418 46" fill="none" stroke="#1a365d" stroke-width="2"/>
+                    <line x1="435" y1="28" x2="435" y2="80" stroke="#333" stroke-width="1.5"/>
+                    <line x1="441" y1="28" x2="441" y2="80" stroke="#333" stroke-width="3"/>
+                    <text x="130" y="100" font-size="11" fill="#4a5568">1e</text>
+                    <text x="180" y="100" font-size="11" fill="#4a5568">2</text>
+                    <text x="235" y="100" font-size="11" fill="#4a5568">e 3e</text>
+                    <text x="340" y="100" font-size="11" fill="#4a5568">4</text>
+                    <text x="395" y="100" font-size="11" fill="#4a5568">e</text>
+                </svg>
+                <p style="font-size:0.85rem; color:#718096;">A semínima começa no “e” do tempo 1 e atravessa o tempo 2 — isso caracteriza a síncope.</p>
+            </div>
+
+            <h4 style="margin-top:2rem;">Questões de verificação</h4>
+
+            <div class="quiz-box">
+                <h4>Exercício 1 — Identificação de valores</h4>
+                <p>Qual figura vale exatamente a metade de uma mínima?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Semibreve</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">Semínima</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Colcheia</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Semicolcheia</div>
+            </div>
+
+            <div class="quiz-box">
+                <h4>Exercício 2 — Ponto de aumento</h4>
+                <p>Uma semínima pontuada equivale a quantas colcheias?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">2 colcheias</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">3 colcheias</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">4 colcheias</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">1 colcheia e meia</div>
+            </div>
+
+            <div class="quiz-box">
+                <h4>Exercício 3 — Equivalência</h4>
+                <p>Quantas semicolcheias são necessárias para preencher o valor de uma mínima?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">4</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">6</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">8</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">16</div>
+            </div>
+
+            <div class="quiz-box">
+                <h4>Exercício 4 — Compasso</h4>
+                <p>Em um compasso 4/4, quantas colcheias cabem em um compasso completo?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">4</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">8</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">16</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">2</div>
+            </div>
+
+            <div class="card highlight">
+                <strong>Sugestão de prática diária (10–15 minutos):</strong>
+                <ol style="margin-bottom:0;">
+                    <li>Bata o pulso constante com o pé (ou use metrônomo em 60–80 bpm).</li>
+                    <li>Conte em voz alta enquanto acompanha as partituras SVG acima.</li>
+                    <li>Execute primeiro apenas semínimas, depois apenas colcheias, depois os exemplos mistos.</li>
+                    <li>Inclua as pausas e as figuras pontuadas com precisão.</li>
+                    <li>Progrida para a síncope somente após dominar os padrões regulares.</li>
+                </ol>
+            </div>
+
+            <div class="card success">
+                <strong>Dica importante:</strong> A leitura rítmica desenvolve-se com repetição e precisão. Prefira andamentos lentos e constantes a velocidades altas com erros. O metrônomo é o melhor professor de ritmo. Use as partituras SVG como referência visual enquanto conta e bate o pulso.
+            </div>
+        </section>
+
+        <!-- MÓDULO 6 -->
+        <section class="module" id="melodia" data-title="6. Melodia e Solfejo">
+            <div class="module-header">
+                <h2>6. Melodia e Solfejo</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('melodia')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Leitura melódica, reconhecimento de intervalos e prática de solfejo.</p>
+
+            <h3>O que é solfejo</h3>
+            <p>Solfejo é a prática de cantar ou ler as notas nominando-as (dó, ré, mi…) ou utilizando sílabas solfegísticas, associando altura e ritmo. Existem dois sistemas principais:</p>
+            <ul>
+                <li><strong>Dó fixo</strong>: a sílaba “dó” corresponde sempre à nota Dó (C). Usado amplamente em países de língua latina e em muitos conservatórios.</li>
+                <li><strong>Dó móvel</strong> (ou solfejo relativo): a sílaba “dó” corresponde sempre à tônica da tonalidade. Facilita a internalização das funções tonais e a leitura em qualquer clave.</li>
+            </ul>
+
+            <h3>Leitura de melodia no pentagrama</h3>
+            <p>Passos recomendados:</p>
+            <ol>
+                <li>Identificar a clave e a armadura de clave.</li>
+                <li>Localizar a tônica e a dominante.</li>
+                <li>Observar o contorno melódico (saltos x graus conjuntos).</li>
+                <li>Contar o ritmo separadamente, se necessário.</li>
+                <li>Solfejar lentamente, mantendo o pulso constante.</li>
+            </ol>
+
+            <h3>Intervalos na melodia</h3>
+            <p>Uma melodia é construída por sucessão de intervalos. Os intervalos de 2ª (graus conjuntos) produzem fluidez; saltos maiores (4ª, 5ª, 6ª, 8ª) criam contraste e tensão. Intervalos dissonantes exigem resolução adequada.</p>
+
+            <div class="card info">
+                <strong>Dica de solfejo:</strong> Comece sempre pela escala da tonalidade da peça. Cante a escala ascendente e descendente com as sílabas. Em seguida, solfeje trechos curtos da melodia, verificando a precisão dos intervalos com um instrumento de referência (piano ou afinador).
+            </div>
+
+            <h3>Exercício de solfejo básico</h3>
+            <p>Escala maior de Dó (dó móvel ou fixo):</p>
+            <div class="note-example">
+                Dó – Ré – Mi – Fá – Sol – Lá – Si – Dó<br>
+                Dó – Si – Lá – Sol – Fá – Mi – Ré – Dó
+            </div>
+            <p>Pratique com metrônomo em andamento lento (60–80 bpm), mantendo a afinação estável.</p>
+        </section>
+
+        <!-- MÓDULO 7 -->
+        <section class="module" id="intervalos" data-title="7. Intervalos">
+            <div class="module-header">
+                <h2>7. Intervalos</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('intervalos')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">A distância entre duas notas e sua classificação.</p>
+
+            <h3>Definição</h3>
+            <p>Intervalo é a distância entre duas alturas. Pode ser melódico (notas sucessivas) ou harmônico (notas simultâneas).</p>
+
+            <h3>Classificação quantitativa e qualitativa</h3>
+            <p>A classificação quantitativa conta o número de graus (2ª, 3ª, 4ª, 5ª, 6ª, 7ª, 8ª). A classificação qualitativa considera o número exato de semitons:</p>
+            <ul>
+                <li><strong>Justos</strong>: 1ª (uníssono), 4ª, 5ª e 8ª.</li>
+                <li><strong>Maiores / menores</strong>: 2ª, 3ª, 6ª e 7ª.</li>
+                <li><strong>Aumentados / diminutos</strong>: resultam da alteração de um intervalo justo ou maior/menor.</li>
+            </ul>
+
+            <h3>Tabela de intervalos a partir do Dó</h3>
+            <table>
+                <tr><th>Intervalo</th><th>Semitons</th><th>Exemplo</th><th>Qualidade</th></tr>
+                <tr><td>2ª menor</td><td>1</td><td>Dó – Ré♭</td><td>menor</td></tr>
+                <tr><td>2ª maior</td><td>2</td><td>Dó – Ré</td><td>maior</td></tr>
+                <tr><td>3ª menor</td><td>3</td><td>Dó – Mi♭</td><td>menor</td></tr>
+                <tr><td>3ª maior</td><td>4</td><td>Dó – Mi</td><td>maior</td></tr>
+                <tr><td>4ª justa</td><td>5</td><td>Dó – Fá</td><td>justa</td></tr>
+                <tr><td>5ª justa</td><td>7</td><td>Dó – Sol</td><td>justa</td></tr>
+                <tr><td>6ª menor</td><td>8</td><td>Dó – Lá♭</td><td>menor</td></tr>
+                <tr><td>6ª maior</td><td>9</td><td>Dó – Lá</td><td>maior</td></tr>
+                <tr><td>7ª menor</td><td>10</td><td>Dó – Si♭</td><td>menor</td></tr>
+                <tr><td>7ª maior</td><td>11</td><td>Dó – Si</td><td>maior</td></tr>
+                <tr><td>8ª justa</td><td>12</td><td>Dó – Dó</td><td>justa</td></tr>
+            </table>
+
+            <h3>Inversão de intervalos</h3>
+            <p>A inversão de um intervalo é obtida elevando a nota inferior uma oitava (ou descendo a superior). A soma das quantidades resulta em 9 (2ª ↔ 7ª, 3ª ↔ 6ª, 4ª ↔ 5ª). Qualitativamente: maior vira menor, justo permanece justo, aumentado vira diminuto.</p>
+        </section>
+
+        <!-- MÓDULO 8 -->
+        <section class="module" id="escalas" data-title="8. Escalas e Modos">
+            <div class="module-header">
+                <h2>8. Escalas e Modos</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('escalas')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Sequências organizadas de notas que definem o material melódico e harmônico.</p>
+
+            <h3>Escala maior (modo jônio)</h3>
+            <p>Fórmula de tons e semitons: <span class="formula">T – T – S – T – T – T – S</span></p>
+            <p>Exemplo em Dó maior: Dó – Ré – Mi – Fá – Sol – Lá – Si – Dó</p>
+            <p>Os graus recebem nomes funcionais: I (tônica), II (supertônica), III (mediante), IV (subdominante), V (dominante), VI (superdominante), VII (sensível).</p>
+
+            <h3>Escalas menores</h3>
+            <ul>
+                <li><strong>Natural</strong>: T – S – T – T – S – T – T (relativa da maior).</li>
+                <li><strong>Harmônica</strong>: eleva o VII grau (cria a sensível). Fórmula: T – S – T – T – S – T+½ – S.</li>
+                <li><strong>Melódica</strong>: eleva VI e VII no ascendente; desce como natural.</li>
+            </ul>
+
+            <h3>Ciclo das quintas / quartas</h3>
+            <p>Organiza as tonalidades segundo o número de acidentes. Cada quinta justa ascendente adiciona um sustenido; cada quarta justa ascendente (ou quinta descendente) adiciona um bemol.</p>
+            <div class="card">
+                Ordem dos sustenidos: Fá – Dó – Sol – Ré – Lá – Mi – Si<br>
+                Ordem dos bemóis: Si – Mi – Lá – Ré – Sol – Dó – Fá
+            </div>
+
+            <h3>Modos gregos (modos eclesiásticos)</h3>
+            <p>Cada modo corresponde a uma escala diatônica iniciada em grau diferente:</p>
+            <ul>
+                <li>Jônio (maior) — I</li>
+                <li>Dórico — II</li>
+                <li>Frígio — III</li>
+                <li>Lídio — IV</li>
+                <li>Mixolídio — V</li>
+                <li>Eólio (menor natural) — VI</li>
+                <li>Lócrio — VII</li>
+            </ul>
+
+            <h3>Outras escalas</h3>
+            <ul>
+                <li><strong>Cromática</strong>: 12 semitons consecutivos.</li>
+                <li><strong>Pentatônica</strong>: cinco notas (maior ou menor).</li>
+                <li><strong>Tons inteiros</strong>: seis tons consecutivos.</li>
+                <li><strong>Blues</strong>: pentatônica menor + blue notes (notas alteradas).</li>
+            </ul>
+        </section>
+
+        <!-- MÓDULO 9 -->
+        <section class="module" id="acordes" data-title="9. Acordes e Harmonia">
+            <div class="module-header">
+                <h2>9. Acordes e Harmonia</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('acordes')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Formação de acordes, funções tonais e progressões.</p>
+
+            <h3>Tríades</h3>
+            <p>Uma tríade é formada por três notas: fundamental, terça e quinta. Tipos principais:</p>
+            <table>
+                <tr><th>Tipo</th><th>Estrutura (a partir da fundamental)</th><th>Exemplo em Dó</th></tr>
+                <tr><td>Maior</td><td>3ª maior + 5ª justa</td><td>Dó – Mi – Sol</td></tr>
+                <tr><td>Menor</td><td>3ª menor + 5ª justa</td><td>Dó – Mi♭ – Sol</td></tr>
+                <tr><td>Aumentada</td><td>3ª maior + 5ª aumentada</td><td>Dó – Mi – Sol♯</td></tr>
+                <tr><td>Diminuta</td><td>3ª menor + 5ª diminuta</td><td>Dó – Mi♭ – Sol♭</td></tr>
+            </table>
+
+            <h3>Tétrades (acordes de sétima)</h3>
+            <p>Adicionam a sétima à tríade. Tipos comuns:</p>
+            <ul>
+                <li>Maior com 7ª maior (Cmaj7)</li>
+                <li>Maior com 7ª menor (C7 — dominante)</li>
+                <li>Menor com 7ª menor (Cm7)</li>
+                <li>Meio-diminuto (Cm7♭5)</li>
+                <li>Diminuto (Cdim7)</li>
+            </ul>
+
+            <h3>Campo harmônico maior</h3>
+            <p>Em qualquer tonalidade maior, os acordes diatônicos seguem o padrão:</p>
+            <div class="formula">I maj – ii min – iii min – IV maj – V maj – vi min – vii° dim</div>
+            <p>Exemplo em Dó maior: C – Dm – Em – F – G – Am – Bdim</p>
+
+            <h3>Funções tonais</h3>
+            <ul>
+                <li><strong>Tônica (I)</strong>: estabilidade, repouso.</li>
+                <li><strong>Subdominante (IV e ii)</strong>: prepara a dominante, afasta da tônica.</li>
+                <li><strong>Dominante (V e vii°)</strong>: tensão máxima, exige resolução para a tônica.</li>
+            </ul>
+
+            <h3>Cadências</h3>
+            <ul>
+                <li><strong>Autêntica</strong>: V → I (perfeita quando ambos em estado fundamental e tônica no soprano).</li>
+                <li><strong>Plagal</strong>: IV → I (“Amém”).</li>
+                <li><strong>Deceptiva (quebrada)</strong>: V → vi.</li>
+                <li><strong>Semicadência</strong>: termina em V.</li>
+            </ul>
+
+            <div class="card success">
+                <strong>Progressão clássica:</strong> I – IV – V – I ou I – vi – IV – V. Essas sequências formam a base de grande parte da música tonal ocidental, do clássico ao popular.
+            </div>
+        </section>
+
+        <!-- MÓDULO 10 -->
+        <section class="module" id="forma" data-title="10. Forma e Textura">
+            <div class="module-header">
+                <h2>10. Forma e Textura</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('forma')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Organização macroestrutural e densidade das vozes.</p>
+
+            <h3>Formas básicas</h3>
+            <ul>
+                <li><strong>Binária</strong> (A–B): duas seções contrastantes.</li>
+                <li><strong>Ternária</strong> (A–B–A): seção intermediária contrastante com retorno.</li>
+                <li><strong>Rondó</strong> (A–B–A–C–A…): refrão recorrente alternado com episódios.</li>
+                <li><strong>Tema e variações</strong>: tema apresentado e sucessivamente transformado.</li>
+                <li><strong>Forma-sonata</strong>: exposição – desenvolvimento – reexposição (com possível coda).</li>
+            </ul>
+
+            <h3>Texturas</h3>
+            <ul>
+                <li><strong>Monofônica</strong>: uma única linha melódica (cantochão, melodia isolada).</li>
+                <li><strong>Homofônica</strong>: melodia principal acompanhada por acordes (a maioria das canções populares).</li>
+                <li><strong>Polifônica</strong>: várias linhas melódicas independentes e de importância semelhante (fuga, cânone).</li>
+                <li><strong>Heterofônica</strong>: variações simultâneas da mesma melodia (comum em músicas tradicionais).</li>
+            </ul>
+        </section>
+
+        <!-- MÓDULO 11 -->
+        <section class="module" id="exercicios" data-title="11. Exercícios Integrados">
+            <div class="module-header">
+                <h2>11. Exercícios Integrados</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('exercicios')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Questões de verificação e sugestões de prática.</p>
+
+            <div class="quiz-box">
+                <h4>Questão 1 — Propriedades do som</h4>
+                <p>Qual propriedade do som permite distinguir um piano de uma flauta tocando a mesma nota com a mesma intensidade?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">Timbre</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Altura</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Duração</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Intensidade</div>
+            </div>
+
+            <div class="quiz-box">
+                <h4>Questão 2 — Intervalos</h4>
+                <p>Quantos semitons possui uma 5ª justa?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">5</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">7</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">6</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">8</div>
+            </div>
+
+            <div class="quiz-box">
+                <h4>Questão 3 — Escala maior</h4>
+                <p>Qual é a fórmula correta de tons e semitons da escala maior?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">T – T – S – T – T – T – S</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">T – S – T – T – S – T – T</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">T – T – T – S – T – T – S</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">S – T – T – T – S – T – T</div>
+            </div>
+
+            <div class="quiz-box">
+                <h4>Questão 4 — Campo harmônico</h4>
+                <p>No campo harmônico maior, qual é a qualidade do acorde do VII grau?</p>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Maior</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Menor</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">Diminuto</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">Aumentado</div>
+            </div>
+
+            <h3>Sugestões de prática diária</h3>
+            <ol>
+                <li>Solfejar uma escala maior e sua relativa menor (5–10 minutos).</li>
+                <li>Ler ritmos simples com metrônomo, aumentando gradualmente a complexidade.</li>
+                <li>Identificar de ouvido intervalos de 2ª, 3ª, 4ª e 5ª.</li>
+                <li>Analisar a harmonia de uma canção simples (cifras → graus romanos).</li>
+                <li>Escrever uma melodia de oito compassos em 4/4 utilizando apenas graus conjuntos e saltos de 3ª.</li>
+            </ol>
+        </section>
+
+        <!-- MÓDULO 12 -->
+        <section class="module" id="glossario" data-title="12. Glossário Essencial">
+            <div class="module-header">
+                <h2>12. Glossário Essencial</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('glossario')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">Definições concisas dos principais termos.</p>
+
+            <div class="card">
+                <p><strong>Acento métrico:</strong> ênfase natural que recai sobre determinados tempos do compasso.</p>
+                <p><strong>Armadura de clave:</strong> conjunto de acidentes colocados no início da pauta que define a tonalidade.</p>
+                <p><strong>Cadência:</strong> progressão harmônica que marca o final de uma frase ou seção.</p>
+                <p><strong>Campo harmônico:</strong> conjunto de acordes diatônicos de uma tonalidade.</p>
+                <p><strong>Clave:</strong> símbolo que fixa a altura de referência das linhas do pentagrama.</p>
+                <p><strong>Compasso:</strong> unidade métrica que agrupa tempos com acento periódico.</p>
+                <p><strong>Dominante:</strong> quinto grau da escala; função de tensão.</p>
+                <p><strong>Enarmonia:</strong> notas de nomes diferentes que soam iguais no temperamento igual (Dó♯ = Ré♭).</p>
+                <p><strong>Figura:</strong> símbolo que representa a duração relativa de uma nota ou pausa.</p>
+                <p><strong>Grau:</strong> posição de uma nota dentro da escala (I a VII).</p>
+                <p><strong>Intervalo:</strong> distância entre duas notas.</p>
+                <p><strong>Modo:</strong> organização específica de intervalos a partir de uma tônica (maior, menor, dórico etc.).</p>
+                <p><strong>Pentagrama:</strong> conjunto de cinco linhas e quatro espaços usado para escrever música.</p>
+                <p><strong>Semitom:</strong> menor intervalo do sistema temperado igual.</p>
+                <p><strong>Solfejo:</strong> prática de leitura cantada das notas com sílabas.</p>
+                <p><strong>Tônica:</strong> primeiro grau da escala; centro de estabilidade tonal.</p>
+                <p><strong>Tom:</strong> intervalo de dois semitons.</p>
+            </div>
+
+            <div class="card highlight">
+                <strong>Observação final:</strong> Este aplicativo constitui um curso completo de fundamentos de teoria musical. O domínio pleno exige prática constante de leitura, solfejo, ditado e análise de obras reais. Recomenda-se complementar o estudo com um instrumento, metrônomo e gravações de referência.
+            </div>
+        </section>
+
+        <!-- MÓDULO 13 — TEORIA DO ETHOS -->
+        <section class="module" id="ethos" data-title="13. Teoria do Ethos na Música">
+            <div class="module-header">
+                <h2>13. Teoria do Ethos na Música</h2>
+                <button class="btn-module-pdf" onclick="imprimirModulo('ethos')">🖨️ Imprimir</button>
+            </div>
+            <p class="module-subtitle">A doutrina antiga sobre o poder da música de moldar o caráter, as emoções e a moral do ouvinte.</p>
+
+            <h3>1. O que é a Teoria do Ethos?</h3>
+            <p>A <strong>Teoria do Ethos</strong> (do grego <em>ἦθος</em> — êthos, que significa “caráter”, “costume” ou “disposição moral”) é a doutrina filosófica e musical da Antiguidade grega segundo a qual a música possui a capacidade de influenciar diretamente o caráter, as emoções e o comportamento ético do ser humano.</p>
+            <p>Para os gregos, a música não era meramente entretenimento ou arte abstrata. Ela era considerada uma força formativa da alma (<em>psychē</em>), capaz de educar, corromper, acalmar ou excitar, conforme o modo, o ritmo e o instrumento empregados.</p>
+
+            <div class="card info">
+                <strong>Definição central:</strong> O ethos musical é a qualidade ética e afetiva inerente a determinada estrutura sonora (especialmente aos modos e aos ritmos), que se transmite ao ouvinte e molda sua disposição interior.
+            </div>
+
+            <h3>2. Fundamentos históricos e filosóficos</h3>
+            <p>A teoria do ethos encontra suas raízes no pensamento de vários filósofos e teóricos gregos:</p>
+            <ul>
+                <li><strong>Damon de Atenas</strong> (século V a.C.): um dos primeiros a sistematizar a ideia de que os modos musicais influenciam diretamente o caráter. Foi professor de Péricles e exerceu forte influência sobre Platão.</li>
+                <li><strong>Platão</strong> (<em>A República</em>, livros III e IV; <em>As Leis</em>): defendeu rigorosamente o controle estatal da música. Argumentava que certos modos fortalecem a coragem e a temperança, enquanto outros enfraquecem o caráter e devem ser banidos da educação dos guardiões.</li>
+                <li><strong>Aristóteles</strong> (<em>A Política</em>, livro VIII): adotou uma posição mais moderada. Reconhecia o poder ético da música, mas admitia seu uso também para o prazer e a catarse (purificação das emoções).</li>
+                <li><strong>Aristóxeno de Tarento</strong>: discípulo de Aristóteles, enfatizou a percepção auditiva e a prática musical, mas manteve a preocupação com os efeitos éticos.</li>
+            </ul>
+
+            <h3>3. Os modos gregos e seus ethé (caracteres)</h3>
+            <p>Na teoria grega, cada <strong>harmonia</strong> (o que hoje chamamos aproximadamente de modo) possuía um ethos específico. As associações mais tradicionais são:</p>
+
+            <table>
+                <tr>
+                    <th>Modo / Harmonia</th>
+                    <th>Ethos associado</th>
+                    <th>Características atribuídas</th>
+                </tr>
+                <tr>
+                    <td><strong>Dório</strong></td>
+                    <td>Viril, estável, corajoso</td>
+                    <td>Modo da temperança e da força moral. Preferido por Platão para a educação dos guardiões.</td>
+                </tr>
+                <tr>
+                    <td><strong>Frígio</strong></td>
+                    <td>Extático, apaixonado, religioso</td>
+                    <td>Associado ao culto de Dionísio e Cibele. Capaz de provocar entusiasmo e frenesi.</td>
+                </tr>
+                <tr>
+                    <td><strong>Lídio</strong></td>
+                    <td>Suave, lamentoso, efeminado</td>
+                    <td>Considerado por Platão excessivamente brando e inadequado para a formação do caráter viril.</td>
+                </tr>
+                <tr>
+                    <td><strong>Mixolídio</strong></td>
+                    <td>Triste, plangente</td>
+                    <td>Ligado ao lamento e à expressão de dor. Platão o rejeitava na educação.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hipodório / Eólio</strong></td>
+                    <td>Majestoso, estável</td>
+                    <td>Variante do dório, associado à serenidade e à grandeza.</td>
+                </tr>
+                <tr>
+                    <td><strong>Hipofrígio</strong></td>
+                    <td>Ativo, enérgico</td>
+                    <td>Considerado adequado para a ação e o movimento.</td>
+                </tr>
+            </table>
+
+            <div class="card highlight">
+                <strong>Observação importante:</strong> As associações de ethos aos modos não eram unânimes. Havia divergências entre os teóricos, e o mesmo modo podia receber avaliações diferentes conforme o autor e o contexto. Ainda assim, a ideia central — de que a estrutura musical carrega qualidade ética — permaneceu constante.
+            </div>
+
+            <h3>4. Ritmo e instrumento no ethos</h3>
+            <p>Não apenas os modos, mas também o <strong>ritmo</strong> e o <strong>instrumento</strong> possuíam ethos próprio:</p>
+            <ul>
+                <li><strong>Ritmos</strong>: ritmos estáveis e ordenados eram considerados educadores da temperança; ritmos agitados e irregulares podiam induzir desordem e excitação excessiva.</li>
+                <li><strong>Instrumentos</strong>:
+                    <ul>
+                        <li>A <strong>lira</strong> (e a cítara) era associada à moderação, à educação e a Apolo.</li>
+                        <li>O <strong>aulos</strong> (instrumento de sopro de palheta dupla) era ligado a Dionísio, ao êxtase e à paixão. Platão o considerava perigoso para a formação do caráter.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>5. Platão e o controle da música na cidade ideal</h3>
+            <p>Em <em>A República</em>, Platão estabelece um dos mais famosos programas de censura musical da história:</p>
+            <ul>
+                <li>Devem ser preservados apenas os modos dório e frígio (este último com restrições), por promoverem coragem e temperança.</li>
+                <li>Modos lídio e mixolídio devem ser banidos, por induzirem moleza e lamento excessivo.</li>
+                <li>Instrumentos polifônicos e ritmos complexos demais são rejeitados.</li>
+                <li>A música deve servir à educação moral e à harmonia da alma com a cidade, nunca ao prazer desordenado.</li>
+            </ul>
+            <p>Para Platão, a música é uma das forças mais poderosas na formação do cidadão. Uma mudança nos modos musicais poderia, segundo ele, provocar a corrupção de toda a ordem política.</p>
+
+            <h3>6. Aristóteles: catarse e uso moderado</h3>
+            <p>Aristóteles, em <em>A Política</em> (livro VIII), concorda que a música educa o caráter, mas amplia suas funções legítimas:</p>
+            <ol>
+                <li><strong>Educação</strong> (<em>paideia</em>) — formação do caráter.</li>
+                <li><strong>Purificação</strong> (<em>katharsis</em>) — liberação controlada de emoções intensas (especialmente no teatro e em cultos).</li>
+                <li><strong>Entretenimento e relaxamento</strong> — uso legítimo no ócio.</li>
+            </ol>
+            <p>Ele admite o uso de modos e ritmos mais excitantes em contextos apropriados (como a catarse), desde que não se tornem o único alimento da alma.</p>
+
+            <h3>7. Legado da Teoria do Ethos</h3>
+            <p>A doutrina do ethos não desapareceu com a Antiguidade. Ela influenciou profundamente:</p>
+            <ul>
+                <li><strong>Idade Média</strong>: a associação de modos eclesiásticos a afetos específicos (teoria dos afetos proto-moderna).</li>
+                <li><strong>Renascimento e Barroco</strong>: a <em>Doutrina dos Afetos</em> (<em>Affektenlehre</em>), que atribuía a intervalos, modos e figuras retóricas musicais a capacidade de despertar emoções definidas.</li>
+                <li><strong>Século XVIII</strong>: tratados de Mattheson, Quantz e outros sobre como a música deve “mover os afetos”.</li>
+                <li><strong>Época contemporânea</strong>: estudos de psicologia da música, neurociência e musicoterapia retomam, sob bases científicas, a antiga intuição de que a música altera estados emocionais, cognitivos e até fisiológicos.</li>
+            </ul>
+
+            <h3>8. Relevância atual</h3>
+            <p>Embora não aceitemos mais a teoria do ethos em sua forma dogmática e moralizante, ela permanece pertinente por várias razões:</p>
+            <ul>
+                <li>Reconhece que a música não é neutra: estruturas sonoras diferentes produzem respostas afetivas distintas.</li>
+                <li>Fundamenta discussões éticas sobre o uso da música na educação, na propaganda, na terapia e na vida pública.</li>
+                <li>Convida o músico e o ouvinte a uma consciência mais profunda do poder formativo da arte sonora.</li>
+            </ul>
+
+            <div class="card success">
+                <strong>Síntese:</strong> A Teoria do Ethos afirma que a música age sobre o caráter. Os gregos antigos associaram modos, ritmos e instrumentos a qualidades éticas e emocionais específicas. Platão radicalizou essa visão em favor de um rigoroso controle educacional; Aristóteles a moderou, admitindo também a catarse e o prazer. Seu legado ecoa na Doutrina dos Afetos barroca e nos estudos contemporâneos sobre o impacto psicológico e social da música.
+            </div>
+
+            <div class="card highlight">
+                <strong>Para refletir:</strong> Ao escolher uma escala, um modo, um ritmo ou um repertório, o músico está, consciente ou inconscientemente, dialogando com uma tradição milenar que atribui à música o poder de formar (ou deformar) a alma. A teoria do ethos convida-nos a exercer esse poder com responsabilidade e discernimento.
+            </div>
+        </section>
+
+        <footer>
+            Professor de Teoria Musical — Material educacional completo e progressivo<br>
+            Conteúdo estruturado para estudo autodidata ou apoio a aulas presenciais.<br>
+            <small>Utilize os botões de impressão para imprimir ou salvar como PDF pelo navegador.</small>
+        </footer>
+    </main>
+
+    <div class="status-msg" id="statusMsg"></div>
+
+    <script>
+        const modules = document.querySelectorAll('.module');
+        const navItems = document.querySelectorAll('.nav-item');
+        const progress = document.getElementById('progress');
+        const total = navItems.length;
+        let currentModuleId = 'intro';
+
+        function showModule(id) {
+            modules.forEach(m => m.classList.remove('active'));
+            navItems.forEach(n => n.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active');
+            const nav = document.querySelector(`[data-module="${id}"]`);
+            if (nav) nav.classList.add('active');
+            currentModuleId = id;
+            const index = Array.from(navItems).findIndex(n => n.dataset.module === id);
+            progress.style.width = ((index + 1) / total * 100) + '%';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => showModule(item.dataset.module));
+        });
+
+        function checkAnswer(el, isCorrect) {
+            const options = el.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(o => {
+                o.style.pointerEvents = 'none';
+                if (o === el) {
+                    o.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+            if (!isCorrect) {
+                options.forEach(o => {
+                    if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) {
+                        o.classList.add('correct');
+                    }
+                });
+            }
+        }
+
+        // ========== IMPRESSÃO NATIVA DO NAVEGADOR ==========
+        function mostrarStatus(msg) {
+            const el = document.getElementById('statusMsg');
+            if (!el) return;
+            el.textContent = msg;
+            el.classList.add('show');
+            clearTimeout(window._statusTimer);
+            window._statusTimer = setTimeout(() => el.classList.remove('show'), 5000);
+        }
+
+        function restaurarInterface(estado) {
+            const sidebar = document.querySelector('.sidebar');
+            const progressBar = document.querySelector('.progress-bar');
+            const main = document.querySelector('.main');
+            if (sidebar) sidebar.style.display = estado.sidebarDisplay;
+            if (progressBar) progressBar.style.display = estado.progressDisplay;
+            if (main) {
+                main.style.marginLeft = estado.mainMargin;
+                main.style.maxWidth = estado.mainMaxWidth;
+                main.style.padding = estado.mainPadding;
+            }
+            document.querySelectorAll('.module').forEach(m => {
+                m.classList.remove('active');
+                m.style.display = '';
+                m.style.visibility = '';
+                m.style.opacity = '';
+                m.style.pageBreakAfter = '';
+            });
+            document.querySelectorAll('.btn-module-pdf, .module-header button').forEach(b => {
+                b.style.display = '';
+            });
+            const capa = document.getElementById('print-capa-temp');
+            if (capa) capa.remove();
+            if (estado.activeId) showModule(estado.activeId);
+        }
+
+        function capturarEstado() {
+            const sidebar = document.querySelector('.sidebar');
+            const progressBar = document.querySelector('.progress-bar');
+            const main = document.querySelector('.main');
+            return {
+                sidebarDisplay: sidebar ? sidebar.style.display : '',
+                progressDisplay: progressBar ? progressBar.style.display : '',
+                mainMargin: main ? main.style.marginLeft : '',
+                mainMaxWidth: main ? main.style.maxWidth : '',
+                mainPadding: main ? main.style.padding : '',
+                activeId: currentModuleId || 'intro'
+            };
+        }
+
+        function prepararParaImpressao() {
+            const sidebar = document.querySelector('.sidebar');
+            const progressBar = document.querySelector('.progress-bar');
+            const main = document.querySelector('.main');
+            if (sidebar) sidebar.style.display = 'none';
+            if (progressBar) progressBar.style.display = 'none';
+            if (main) {
+                main.style.marginLeft = '0';
+                main.style.maxWidth = '100%';
+                main.style.padding = '12px 20px';
+            }
+            document.querySelectorAll('.btn-module-pdf, .module-header button').forEach(b => {
+                b.style.display = 'none';
+            });
+        }
+
+        function imprimirModulo(id) {
+            const modulo = document.getElementById(id);
+            if (!modulo) {
+                mostrarStatus('Módulo não encontrado.');
+                return;
+            }
+            const estado = capturarEstado();
+            prepararParaImpressao();
+
+            // Mostra apenas o módulo solicitado
+            document.querySelectorAll('.module').forEach(m => {
+                m.classList.remove('active');
+                m.style.display = 'none';
+            });
+            modulo.classList.add('active');
+            modulo.style.display = 'block';
+            modulo.style.visibility = 'visible';
+            modulo.style.opacity = '1';
+
+            mostrarStatus('Abrindo diálogo de impressão...');
+
+            // Aguarda o layout e abre a impressão
+            setTimeout(() => {
+                window.print();
+                // Restaura após o diálogo (o afterprint cobre a maioria dos casos)
+                setTimeout(() => restaurarInterface(estado), 300);
+            }, 200);
+        }
+
+        function imprimirModuloAtual() {
+            imprimirModulo(currentModuleId || 'intro');
+        }
+
+        function imprimirTodos() {
+            const estado = capturarEstado();
+            prepararParaImpressao();
+
+            // Mostra todos os módulos
+            document.querySelectorAll('.module').forEach(m => {
+                m.classList.add('active');
+                m.style.display = 'block';
+                m.style.visibility = 'visible';
+                m.style.opacity = '1';
+                m.style.pageBreakAfter = 'always';
+            });
+
+            // Capa temporária
+            const main = document.querySelector('.main');
+            let capa = document.getElementById('print-capa-temp');
+            if (!capa && main) {
+                capa = document.createElement('div');
+                capa.id = 'print-capa-temp';
+                capa.style.cssText = 'text-align:center;padding:48px 16px 40px;page-break-after:always;';
+                capa.innerHTML = `
+                    <h1 style="color:#000;font-size:22pt;margin-bottom:8px;">Professor de Teoria Musical</h1>
+                    <p style="font-size:13pt;color:#222;margin-bottom:6px;">Curso Completo e Detalhado</p>
+                    <p style="color:#444;margin-bottom:18px;">13 módulos progressivos</p>
+                    <hr style="width:45%;margin:18px auto;border:none;border-top:2px solid #000;">
+                    <p style="color:#333;font-size:10.5pt;line-height:1.5;">
+                        Fundamentos • Notação • Ritmo • Melodia e Solfejo<br>
+                        Intervalos • Escalas • Harmonia • Forma • Ethos • Exercícios e Glossário
+                    </p>
+                `;
+                main.insertBefore(capa, main.firstChild);
+            }
+
+            mostrarStatus('Abrindo diálogo de impressão do curso completo...');
+
+            setTimeout(() => {
+                window.print();
+                setTimeout(() => restaurarInterface(estado), 300);
+            }, 250);
+        }
+
+        // Restaura a interface quando o diálogo de impressão é fechado
+        window.addEventListener('afterprint', () => {
+            // Segurança extra caso o timeout não tenha restaurado
+            const sidebar = document.querySelector('.sidebar');
+            if (sidebar && sidebar.style.display === 'none') {
+                // Se ainda estiver em modo impressão, tenta restaurar o módulo ativo
+                const ativo = document.querySelector('.nav-item.active');
+                if (ativo) showModule(ativo.dataset.module);
+                if (sidebar) sidebar.style.display = '';
+                const progressBar = document.querySelector('.progress-bar');
+                if (progressBar) progressBar.style.display = '';
+                const main = document.querySelector('.main');
+                if (main) {
+                    main.style.marginLeft = '';
+                    main.style.maxWidth = '';
+                    main.style.padding = '';
+                }
+                document.querySelectorAll('.module').forEach(m => {
+                    m.style.pageBreakAfter = '';
+                });
+                document.querySelectorAll('.btn-module-pdf, .module-header button').forEach(b => {
+                    b.style.display = '';
+                });
+                const capa = document.getElementById('print-capa-temp');
+                if (capa) capa.remove();
+            }
+        });
+
+        // Initialize
+        progress.style.width = (1 / total * 100) + '%';
+    </script>
+</body>
+</html>
